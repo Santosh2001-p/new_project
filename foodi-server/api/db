@@ -1,0 +1,30 @@
+// db.js
+const mongoose = require('mongoose');
+
+
+const mongoURI = 'mongodb+srv://santosh:12345@cluster0.h61u02m.mongodb.net/foodi-project?retryWrites=true&w=majority&appName=Cluster0';
+
+const connectDB = async () => {
+    try {
+        await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log('Connected to MongoDB');
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
+    }
+};
+let email = 'pandrankisantoshkumar462@gmail.com'
+
+const getuser = async () => {
+    const fetch_data = mongoose.connection.db.collection('users');
+    const data = await fetch_data.find({}).toArray();
+    //  console.log(data)
+    return data;
+};
+
+
+
+module.exports = {
+    connectDB,
+    getuser
+
+};
